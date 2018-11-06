@@ -48,29 +48,44 @@ namespace Employees.Core.Factories
         public ICollection<IEmployee> Create(ICollection<EmployeeFlat> input)
         {
             var result = new Dictionary<long, IEmployee>();
+            var surchargeCalculators = new Dictionary<EmployeeType, ISurchargeCalculator>();
+            var subordinatesSurchargeCalculators = new Dictionary<EmployeeType, ISubordinatesSurchargeCalculator>();
 
-            // first loop to initialize employees
-            foreach (var employeeFlat in input)
+            // initializing calculators
+            foreach (var type in input.Select(s => s.Type).Distinct())
             {
-                var employeeDetails = this.configuration.Details[employeeFlat.Type];
+                var employeeDetails = this.configuration.Details[type];
                 var surchargeCalculator = new SurchargeCalculator(employeeDetails.BaseSurchargePercentage,
                     employeeDetails.MaxBaseSurchargePercentage);
+                surchargeCalculators.Add(type, surchargeCalculator);
 
+                if (type != EmployeeType.Employee)
+                {
+                    var subordinatesSurchargeCalculator = new SubordinatesSurchargeCalculator(
+                        employeeDetails.SubordinatesSurchargePercentage, 
+                        employeeDetails.SubordinatesSurchargeLevel);
+                    subordinatesSurchargeCalculators.Add(type, subordinatesSurchargeCalculator);
+                }
+            }
+
+            // initializing employees
+            foreach (var employeeFlat in input)
+            {
+                var surchargeCalculator = surchargeCalculators[employeeFlat.Type];
                 IEmployee employee = new Employee(surchargeCalculator, employeeFlat.Id, employeeFlat.Name,
                     employeeFlat.DateOfEmployment, employeeFlat.BaseRate);
 
                 if (employeeFlat.Type != EmployeeType.Employee)
                 {
                     // decorating employee
-                    var subordinatesSurchargeCalculator = new SubordinatesSurchargeCalculator(
-                        employeeDetails.SubordinatesSurchargePercentage, employeeDetails.SubordinatesSurchargeLevel);
+                    var subordinatesSurchargeCalculator = subordinatesSurchargeCalculators[employeeFlat.Type];
                     employee = new ChiefEmployee(employee, subordinatesSurchargeCalculator);
                 }
 
                 result.Add(employee.Id, employee);
             }
 
-            // second loop to set subordinates
+            // setting subordinates
             foreach (var employeeFlat in input)
             {
                 if (employeeFlat.Subordinates == null || !employeeFlat.Subordinates.Any()) continue;
@@ -94,7 +109,7 @@ namespace Employees.Core.Factories
                 }
             }
 
-            // third loop to prevent subordinates closure
+            // one more loop to prevent subordinates closure
             foreach (var employee in result.Values)
             {
                 if (HasSubordinatesClosure(employee, employee.Subordinates))
