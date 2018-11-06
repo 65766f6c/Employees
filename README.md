@@ -4,7 +4,7 @@ Employees management library
 namespace Employees.Core
 ```
 
-## Easy start example:
+Easy start example:
 ```
 var manager = new EmployeesManagerBuilder(configuration)
 	.AddEmployees(employees)
@@ -13,7 +13,7 @@ var manager = new EmployeesManagerBuilder(configuration)
 var totalRate = manager.GetTotalRate(DateTime.UtcNow);
 ```
 
-## A little more fluent example:
+A little more fluent example:
 ```
 var employees = new EmployeesManagerBuilder()
 	.AddEmployees(employees)
