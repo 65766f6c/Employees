@@ -11,6 +11,7 @@ var manager = new EmployeesManagerBuilder(configuration)
 	.Build();
 		
 var totalRate = manager.GetTotalRate(DateTime.UtcNow);
+var rate = manager.Employees.First.GetTotalRate(DateTime.UtcNow);
 ```
 
 A little more fluent example:
