@@ -40,7 +40,7 @@ namespace Employees.Core.Domain
 
         public decimal GetTotalRate(DateTime targetDate)
         {
-            var employmentTimeSpan = DateTime.UtcNow - DateOfEmployment;
+            var employmentTimeSpan = targetDate - DateOfEmployment;
 
             // there is no rate before employment
             if (employmentTimeSpan.Ticks < 0) return decimal.Zero;
