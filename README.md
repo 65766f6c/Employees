@@ -53,7 +53,7 @@ var configuration = new EmployeesConfiguration()
 The `EmployeesManagerBuilder.AddEmployees` method takes `ICollection<EmployeeFlat>` as parameter. You can initialize your input like that (note that you need to set a unique identity for each instance in case it's a subordinate/chief):
 ```cs
 var subordinateIds = new List<long>() { 1, 10, 11 };
-new EmployeeFlat()
+var employeeFlat = new EmployeeFlat()
 {
 	Id = uniqueId,
 	BaseRate = 1000000,
