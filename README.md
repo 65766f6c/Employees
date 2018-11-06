@@ -1,10 +1,7 @@
 # Employees
-####Employees management library  
+### Employees management library  
   
-Default namespace:
-```cs
-namespace Employees.Core
-```
+Default namespace: `Employees.Core`  
   
 Easy start example:
 ```cs
@@ -14,9 +11,9 @@ var manager = new EmployeesManagerBuilder(configuration)
 		
 var totalRate = manager.GetTotalRate(DateTime.UtcNow);
 var rate = manager.Employees.First.GetTotalRate(DateTime.UtcNow);
-```
+```  
   
-The EmployeesConfiguration type represents the container for collection of EmployeeType/EmployeeDetails pairs and directed to configure employees with specified preferences. The EmployeeDetails type stores surcharge details for specified type. If you are using chief employee types, you also may need to specify SubordinatesSurchargePercentage, and possibly SubordinatesSurchargeLevel (default is max value) properties. You can initialize configuration like the code below:
+The `EmployeesConfiguration` type represents the container for collection of `EmployeeType`/`EmployeeDetails` pairs and directed to configure employees with specified preferences. The `EmployeeDetails` type stores surcharge details for specified type. If you are using chief employee types, you also may need to specify `SubordinatesSurchargePercentage`, and possibly `SubordinatesSurchargeLevel` (default is max value) properties. You can initialize configuration like the code below:
 ```cs
 var configuration = new EmployeesConfiguration()
 {
@@ -53,7 +50,7 @@ var configuration = new EmployeesConfiguration()
 };
 ```
   
-The EmployeesManagerBuilder.AddEmployees method takes ICollection<EmployeeFlat> as parameter. You can initialize your input like that (note that you need to set a unique identity for each instance in case it's a subordinate/chief):
+The `EmployeesManagerBuilder.AddEmployees` method takes `ICollection<EmployeeFlat>` as parameter. You can initialize your input like that (note that you need to set a unique identity for each instance in case it's a subordinate/chief):
 ```cs
 var subordinateIds = new List<long>() { 1, 10, 11 };
 new EmployeeFlat()
