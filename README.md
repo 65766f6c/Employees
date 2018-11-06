@@ -1,5 +1,5 @@
 # Employees
-## Employees management library
+Employees management library
 ```
 namespace Employees.Core
 ```
