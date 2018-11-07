@@ -19,7 +19,10 @@ namespace Employees.Tests
         {
             Employees = new List<EmployeeFlat>();
 
+            // generating the test data
             int i = 1;
+
+            // base employees
             for (; i <= 10; i++)
             {
                 Employees.Add(new EmployeeFlat()
@@ -31,6 +34,8 @@ namespace Employees.Tests
                     Type = EmployeeType.Employee
                 });
             }
+
+            // managers
             for (; i <= 15; i++)
             {
                 Employees.Add(new EmployeeFlat()
@@ -55,6 +60,8 @@ namespace Employees.Tests
                     Subordinates = new List<long>() { i - 5 }
                 });
             }
+
+            // sales
             for (; i <= 30; i++)
             {
                 Employees.Add(new EmployeeFlat()
