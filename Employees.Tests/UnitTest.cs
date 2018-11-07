@@ -33,7 +33,7 @@ namespace Employees.Tests
         [Fact]
         public void TestOverallRate()
         {
-            var testRate = Manager.Employees.Sum(s => s.CurrentTotalRate);
+            var testRate = Manager.Employees.Values.Sum(s => s.CurrentTotalRate);
             var rate = Manager.CurrentTotalRate;
             Assert.True(decimal.Compare(testRate, rate) == decimal.Zero);
         }
@@ -46,7 +46,7 @@ namespace Employees.Tests
         {
             foreach (var testEmployee in TestData.Employees)
             {
-                foreach (var employee in Manager.Employees)
+                foreach (var employee in Manager.Employees.Values)
                 {
                     if (testEmployee.Id == employee.Id)
                     {
@@ -125,7 +125,7 @@ namespace Employees.Tests
         {
             foreach (var testEmployee in TestData.Employees)
             {
-                foreach (var employee in Manager.Employees)
+                foreach (var employee in Manager.Employees.Values)
                 {
                     if (testEmployee.Id == employee.Id)
                     {

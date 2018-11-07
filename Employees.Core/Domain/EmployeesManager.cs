@@ -15,13 +15,13 @@ namespace Employees.Core.Domain
         /// <summary>
         /// Initializes a new instance of <see cref="EmployeesManager"/> class.
         /// </summary>
-        public EmployeesManager(ICollection<IEmployee> employees)
+        public EmployeesManager(IDictionary<long, IEmployee> employees)
         {
             Employees = employees;
         }
 
         /// <inheritdoc/>
-        public ICollection<IEmployee> Employees { get; }
+        public IDictionary<long, IEmployee> Employees { get; }
 
         /// <inheritdoc/>
         public decimal CurrentTotalRate => GetTotalRate(DateTime.UtcNow);
@@ -29,7 +29,7 @@ namespace Employees.Core.Domain
         /// <inheritdoc/>
         public decimal GetTotalRate(DateTime targetDate)
         {
-            return Employees.Sum(s => s.GetTotalRate(targetDate));
+            return Employees.Values.Sum(s => s.GetTotalRate(targetDate));
         }
     }
 }

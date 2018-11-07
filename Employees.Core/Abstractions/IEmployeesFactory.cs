@@ -17,6 +17,6 @@ namespace Employees.Core.Abstractions
         /// </summary>
         /// <param name="employees">Initial employees</param>
         /// <returns>Target domain employees collection</returns>
-        ICollection<IEmployee> Create(ICollection<EmployeeFlat> employees);
+        IDictionary<long, IEmployee> Create(ICollection<EmployeeFlat> employees);
     }
 }

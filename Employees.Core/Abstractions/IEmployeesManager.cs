@@ -15,7 +15,7 @@ namespace Employees.Core.Abstractions
         /// <summary>
         /// Gets the employees collection
         /// </summary>
-        ICollection<IEmployee> Employees { get; }
+        IDictionary<long, IEmployee> Employees { get; }
 
         /// <summary>
         /// Gets the current total employees rate

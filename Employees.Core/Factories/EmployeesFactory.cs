@@ -45,7 +45,7 @@ namespace Employees.Core.Factories
         }
 
         /// <inheritdoc/>
-        public ICollection<IEmployee> Create(ICollection<EmployeeFlat> input)
+        public IDictionary<long, IEmployee> Create(ICollection<EmployeeFlat> input)
         {
             var result = new Dictionary<long, IEmployee>();
             var surchargeCalculators = new Dictionary<EmployeeType, ISurchargeCalculator>();
@@ -118,7 +118,7 @@ namespace Employees.Core.Factories
                 }
             }
 
-            return result.Values;
+            return result;
         }
 
         private bool HasSubordinatesClosure(IEmployee employee, ICollection<IEmployee> subordinates)
