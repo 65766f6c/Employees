@@ -10,7 +10,7 @@ var manager = new EmployeesManagerBuilder(configuration)
 	.Build();
 		
 var totalRate = manager.GetTotalRate(DateTime.UtcNow);
-var rate = manager.Employees.First.GetTotalRate(DateTime.UtcNow);
+var rate = manager.Employees.First().Value.GetTotalRate(DateTime.UtcNow);
 ```  
   
 The `EmployeesConfiguration` type represents the container for collection of `EmployeeType`/`EmployeeDetails` pairs and directed to configure employees with specified preferences. The `EmployeeDetails` type stores surcharge details for specified type. If you are using chief employee types, you also may need to specify `SubordinatesSurchargePercentage`, and possibly `SubordinatesSurchargeLevel` (default is max value) properties. You can initialize configuration like the code below:
