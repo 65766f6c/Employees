@@ -88,5 +88,5 @@ var employees = new EmployeesManagerBuilder()
 	.Employees;
 ```
 
-For UML diagram see [uml.jpg](https://github.com/65766f6c/Employees/blob/master/uml.jpg)
+For UML diagram see [uml.jpg](https://github.com/65766f6c/Employees/blob/master/uml.jpg)  
 For additional info see [description.md](https://github.com/65766f6c/Employees/blob/master/description.md)
